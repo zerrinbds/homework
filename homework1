@@ -1,0 +1,100 @@
+#include<stdio.h>
+#include<Windows.h>
+#include<conio.h>
+void main()
+{
+	/*Hesap numarası=123456789 ve sifre=1234 kullanarak programa girebiliriz*/
+	int HesapNo,Sifre,sec1,sec2,cek,bak=100,yat,GonHes,gon;
+	printf("Lutfen hesap numaranizi ve sifrenizi giriniz:\n");
+	hesapnumarası:
+	printf("Hesap Numaraniz:");
+	scanf("%d", &HesapNo);
+	
+	if(HesapNo==123456789)  /*Hesap numarasının dogrulugunu kontrol ediyoruz*/
+	{
+		sifre:
+		printf("Sifre:");    /*Hesap numarası dogru ise sifreyi istiyoruz*/
+		scanf("%d", &Sifre);
+		if(Sifre==1234)  /*Sifre dogru ise giris yapılıyor ve menu ekrana geliyor*/
+		{
+			printf("bilgileriniz dogrulaniyor... Lutfen bekleyiniz...\n");
+			Sleep(1500);
+			menu:
+			printf("---BANKA İSLEMLERİ MENUSU---\n");
+			printf("1.Hesap bakiyeniz:\n");
+			printf("2.Para cekme:\n");
+			printf("3.Para yatirma:\n");
+			printf("4.Baska bir hesaba para gonderme:\n");
+			printf("secenek<1-4>:");
+			scanf("%d",&sec1);
+			switch(sec1)  /* Menu seceneklerindeki islemler*/
+			{
+			case 1:  /*Hesapta bulunan para miktarı*/
+				printf("Hesap bakiyeniz:%dTL\n",bak);   
+				break;
+			case 2:   /*Hesaptan para cekme*/
+				printf("Cekmek istediginiz miktari giriniz:");   
+				scanf("%d", &cek);
+				if(bak>cek)
+				{
+					bak=bak-cek;
+						printf("Kalan bakiyeniz:%d\n", bak);
+				}
+				else
+					printf("Bakiyeniz yetersiz... En fazla %d TL cekebilirsiniz... ", bak);
+				break;
+			case 3:     /*Hesaba para yatırma*/
+				printf("Yatirmak istediginiz miktari giriniz:\n"); 
+				scanf("%d",&yat);
+				bak=bak+yat;
+				printf("Paraniz hesabiniza yatiriliyor... Lutfen bekleyiniz...\n");
+				Sleep(1000);
+				printf("Paraniz hesabiniza yatirilistir. Yeni bakiyeniz:%dTL\n",bak);
+				break;
+			case 4:   /*Baska bi hesaba para gonderme*/
+				printf("Gondermek istediginiz hesap numarasini giriniz:");
+				scanf("%d",&GonHes);
+				printf("Gondermek istediginiz miktari giriniz:");
+				scanf("%d",&gon);
+				if(bak>=gon)
+					bak=bak-gon;
+					printf("%d nolu hesaba %d TL gonderildi.\n",GonHes,gon);
+					printf("Kalan bakiyeniz:%d\n",bak);
+				if(bak<gon)
+					printf("YEtersiz bakiye!");
+			}
+
+			if(sec1!=1 && sec1!=2 && sec1!=3 && sec1!=4)  /*Menude farklı bir secim yapıldıgında uyarı*/
+			{
+				printf("Hatali secim yaptiniz... Lutfen 1,2,3,4 seceneklerinden birini seciniz...\n");
+				goto menu; /*Yeniden secim icin menuye dönüyoruz*/
+			}
+
+			printf("Baska bir islem yapmak istiyomusunuz?\n"); /*Islemler bittikten sonra baska bir işlem yapmak istedgini soruyoruz*/
+			secim2:
+			printf("1.Menu\n2.Cikis\nsecenek<1-2>:");  
+			scanf("%d",&sec2);
+			
+			if(sec2==1)    /*Baska bir islem icin menuye donuyoruz*/
+				goto menu;
+			else if(sec2==2)   /* Cıkıs*/
+			{
+				printf("Hesabiniz kapatiliyor....");   
+				exit(0);
+				Sleep(1500);
+			}
+			else  /*menu ve cıkıstan farklı secim icin uyarı*/
+			{
+				printf("Hatali secim yaptiniz\nLutfen 1,2 seceneklerinden birini seciniz..\n");
+				goto secim2;
+			}
+		}
+		else /*Sifre yanlıs girildiginde uyarıyoruz ve tekrar girilmesini istiyoruz*/
+			printf("Yanlis sifre girdiniz!\nLutfen tekrar deneyiniz\n");
+			goto sifre;
+	}	
+	else /*Hesap numarası yanlıs girildiginde uyarı veriyoruz ve tekrar girilmesini istiyoruz*/
+		printf("Boyle bi hesap mevcut degildir...\nLutfen tekrar deneyiniz\n");
+		goto hesapnumarası;
+	
+}
