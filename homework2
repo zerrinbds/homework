@@ -1,0 +1,19 @@
+#include<stdio.h>
+#include<Windows.h>
+void main()
+{
+	
+	int sayi,a,b,c,d;
+	printf("Lutfen dort basamakli bir sayi giriniz:");
+	scanf("%d", &sayi);
+	printf("Girdiginiz sayi...\n");
+	Sleep(2000);
+	a=sayi/1000;
+	b=(sayi-(a*1000))/100;
+	c=(sayi-(a*1000+b*100))/10;
+	d=sayi%10;
+	printf("%d binlik\n",a);
+	printf("%d yuzluk\n",b);
+	printf("%d onluk\n",c);
+	printf("%d birlik\t'den olusmaktadir...\n",d);
+}
